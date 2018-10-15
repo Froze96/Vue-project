@@ -1,81 +1,74 @@
 <template>
   <div id="app">  
-   <header-section @showModal="onShowModal"> 
-            
-   </header-section>
+    <header-section @showModal="onShowModal">            
+    </header-section>
 
 
-   <modal-window v-if="modalActive"                 
+    <modal-window v-if="modalActive"                 
                  @closeModal="onCloseModal">
-   </modal-window>
+    </modal-window>
 
 
 
-   <div class="slogan  uk-overflow-hidden uk-light ">   
-    <div class="slogan__title "  uk-parallax="opacity: 0,0.5,1; y: -100,0; scale: 2,1.5,1; viewport: 0.5;">{{ sloganTitle.toUpperCase() }}</div>
-  </div> 
+    <div class="slogan  uk-overflow-hidden uk-light ">   
+        <div class="slogan__title "  uk-parallax="opacity: 0,0.5,1; y: -100,0; scale: 2,1.5,1; viewport: 0.5;">{{ sloganTitle.toUpperCase() }}</div>
+    </div> 
 
 
- 
-  
-  <app-card-view  :cardStats="cardStats" 
-                   @closeCardView="onCloseCardView">    
-  </app-card-view>
- 
-
-
-
-  <div class="card-section">
-    <app-card @cardView="onCardView"> </app-card>
-  </div>
-
-  <div class="trend-section"> 
-  <app-trend></app-trend>
-  </div>
-
-  
-  <app-slider> </app-slider>
+   
+    
+    <app-card-view  :cardStats="cardStats" 
+                     @closeCardView="onCloseCardView">    
+    </app-card-view>
+     
 
 
 
+    <div class="card-section">
+        <app-card @cardView="onCardView"> </app-card>
+    </div>
 
-<div class="review uk-overflow-hidden ">
-     <div  class="review__img"    uk-scrollspy="cls: uk-animation-kenburns; repeat: true"> </div>
-     <div class="review__form">
-        <div class="uk-animation-toggle">
-            <div class="review__form-item uk-width-1-1@m uk-width-1-2@l uk-card uk-card-default uk-card-body  uk-animation-fade">
+    <div class="trend-section"> 
+        <app-trend></app-trend>
+    </div>
 
-                    <p class="uk-text-center">Leave us a review</p>
-                    <app-review-form> </app-review-form>          
-                    <div class="uk-divider-icon"></div>
+      
+    <app-slider> </app-slider>
+
+
+
+
+    <div class="review uk-overflow-hidden ">
+         <div  class="review__img"    uk-scrollspy="cls: uk-animation-kenburns; repeat: true"> </div>
+         <div class="review__form">
+            <div class="uk-animation-toggle">
+                <div class="review__form-item uk-width-1-1@m uk-width-1-2@l uk-card uk-card-default uk-card-body  uk-animation-fade">
+
+                        <p class="uk-text-center">Leave us a review</p>
+                        <app-review-form> </app-review-form>          
+                        <div class="uk-divider-icon"></div>
+                </div>
             </div>
-        </div>
-     </div>
-</div>
+         </div>
+    </div>
 
 
 
 
 
-
-<app-projects> </app-projects>
-
-<div class="prefooter">
-    <div class="prefooter__title" uk-parallax="opacity: 0,0.5,1; y: -100,0; scale: 2,1.5,1; viewport: 0.5;">Choose your future today</div>
-     <button class="uk-button uk-button-primary" > Choose </button>      
-</div>
-
- <app-footer> </app-footer>
-
-
-  
+    <app-projects> </app-projects>
 
 
 
+    <div class="prefooter">
+        <div class="prefooter__title" uk-parallax="opacity: 0,0.5,1; y: -100,0; scale: 2,1.5,1; viewport: 0.5;">Choose your future today</div>
+         <button class="uk-button uk-button-primary" > Choose </button>      
+    </div>
 
 
 
-  
+     <app-footer> </app-footer>
+
 
   </div>
 </template>
@@ -103,7 +96,6 @@ export default {
           active:false,
           id:0,
        },
-
     }
   }, 
   methods:{
@@ -154,7 +146,7 @@ export default {
     top: 0;
     width: 100%;
     will-change: transform;
-    z-index: -5; 
+    z-index: -4; 
   }
 
   .slogan__title{
@@ -171,8 +163,8 @@ export default {
     background-size: cover;  
   }
   .trend-section{
-   padding: 5rem 0 5rem 0;
-   background-color:rgba(13, 19, 28, .9);
+    padding: 5rem 0 5rem 0;
+    background-color:rgba(13, 19, 28, .9);
   }
 
 
@@ -182,22 +174,22 @@ export default {
     background-size: cover;
   }
   .review__form{
-   position: relative;   
-   width: 80%;
-   margin:0 auto;   
+    position: relative;   
+    width: 80%;
+    margin:0 auto;   
   }
   .review__form-item{  
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 88vh;
-  overflow: hidden;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 900px; right: 0;
-  background-color:rgba(13, 19, 28, .9);
-  color:#fff;
-  font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88vh;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 900px; right: 0;
+    background-color:rgba(13, 19, 28, .9);
+    color:#fff;
+    font-size: 22px;
   }
 
   .prefooter{
@@ -207,15 +199,12 @@ export default {
     text-align: center;
   }
   .prefooter__title{
-      color: #fff;
-      font-size: 35px;
-      padding-top: 50px;
+    color: #fff;
+    font-size: 35px;
+    padding-top: 50px;
       
   }
   
-
- 
-
 
 
 @media screen and (max-width: 815px){
