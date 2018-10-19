@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=K2D');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 *{
 	padding: 0;
-	margin:0;	
+	margin:0;
 }
 html{
-	font-family: 'K2D', sans-serif !important;
+	font-family: 'Montserrat', sans-serif !important;
 }
-body{
 
+div, button {
+  box-sizing: border-box;
 }
