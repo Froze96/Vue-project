@@ -1,142 +1,91 @@
 <template>
+  <div class="trend">
+    <div class="trend__image">
+      <img :src="imgURL" alt="trend-item">
+    </div>
 
-  
+    <div class="trend__title">
+      <slot name="title"/>
+    </div>
 
-
-
- 
-
-      <div class="trend" >
-        <div class="trend__header">Our trends</div>
-
-        <div class="trend__body">
-
-             <div class="trend__body-item"  v-for="trend in trends">
-                    <div class="trend__body-logo"><img :src="trend.imgSrc" alt="trend-item"></div>
-                    <div class="trend__body-title">{{ trend.title }}</div>                    
-                    <div class="trend__body-text">{{ trend.text }}</div>
-             </div> 
-
-        </div>
-      
-      
-      </div>
-
-
- 
-
- 
+    <div class="trend__content">
+      <slot name="content"/>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  data(){
-    return{
-      trends:[
-      {
-        imgSrc:'./src/assets/trend1.svg',
-        title:'Eco Energy',
-        text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa fuga nesciunt, blanditiis ea fugiat nemo.'
-      },
-      {
-        imgSrc:'./src/assets/trend2.svg',
-        title:'Green Forest',
-        text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa fuga nesciunt, blanditiis ea fugiat nemo.'
-      },
-      {
-        imgSrc:'./src/assets/trend3.svg',
-        title:'Fresh Water',
-        text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa fuga nesciunt, blanditiis ea fugiat nemo.'
-      }, {
-        imgSrc:'./src/assets/trend4.svg',
-        title:'Clear City',
-        text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa fuga nesciunt, blanditiis ea fugiat nemo.'
-      },
-       {
-        imgSrc:'./src/assets/trend5.svg',
-        title:'Fresh Air',
-        text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa fuga nesciunt, blanditiis ea fugiat nemo.'
-      },
-       {
-        imgSrc:'./src/assets/trend6.svg',
-        title:'Eco Houses',
-        text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa fuga nesciunt, blanditiis ea fugiat nemo.'
+  export default {
+    name: "Trend",
+    props: {
+      imgURL: {
+        type: String,
+        required: true
       }
-
-
-
-      ]
     }
   }
-} 
 </script>
 
-<style lang="css" >
-    .trend{
+<style lang="scss">
+  .trend {
+    width: calc(33% - 2rem);
+    margin: 1rem;
+    &__image {
       display: flex;
-      flex-direction: column;
-      align-items: center;  
-      max-width: 70%;     
-      margin: 0 auto;
-      color:#fff;
-    }
-    .trend__header{
-      font-size: 35px;
-      margin-bottom: 1.5rem;
-    }
-    .trend__body{
-      display: flex;      
+      justify-content: center;
+      align-items: center;
       flex-direction: row;
-      justify-content: space-between;
-      padding: .5rem;      
-      flex-wrap: wrap;
-     
-    }
-    .trend__body-item{
-      display: flex;
-      flex-direction: column;
-      width: 30%;      
-      margin-top: 1.5rem;
-      padding: .5rem;     
-      text-align: center;
-    }
-    .trend__body-title{
-      font-size: 24px;
-      padding-top: .5rem;      
-    }
-
-    .trend__body-text{        
-      font-size: 20px;
-      margin-top: .5rem;
-    }
-    .trend__body-logo{
-      display: flex;
-      justify-content: center;      
-    }
-    .trend__body-logo img:hover{
-      transform: scale(1.2);
-       transition:all .5s linear;
-     
-    }
-    
-
-
-     @media screen and (max-width: 815px){      
-         .trend__body-item{
-          width: 45%;     
-       }
-     }
-
-
-    @media screen and (max-width: 570px){      
-         .trend__body-item{
-          width: 90%;     
-        }
-
+      margin-bottom: 1rem;
+      & img {
+        width: 115px;
+        height: auto;
+        object-fit: contain;
       }
-   
- 
+    }
+    &__title {
+      font-size: 1.25rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: calc(.5rem + 2px);
+      padding-bottom: calc(.5rem + 2px);
+      position: relative;
+      color: #fff;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -2px;
+        height: 2px;
+        background: #fff;
+      }
+    }
+    &__content {
+      font-size: .9rem;
+      line-height: 1rem;
+      font-weight: 300;
+      padding: 0 2rem;
+      text-align: justify;
+      word-break: break-all;
+      color: #fff;
+    }
+  }
 
+   @media screen and (max-width: 1200px) {
+      .trend {
+        width: calc(50% - 2rem);
+        margin: 1rem .5rem;
+        &__content {
+          padding: 0 .5rem;
+        }
+      }
+    }
 
-
+    @media screen and (max-width: 600px) {
+      .trend {
+        width: 100%;       
+      } 
+    }
 </style>

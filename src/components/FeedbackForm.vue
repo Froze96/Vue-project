@@ -1,8 +1,5 @@
 <template>
 <div class="form">
-
-
-
     <form v-show="!showSubmitFeedback && !showSpinner"  action="#"  method="post">
         <fieldset class="uk-fieldset">
 
@@ -12,7 +9,7 @@
                     <label for="userName">Input your name </label>
                     <label class="form__error"   for="userName" v-show="nameCheck && !beforeClick" >*empty field</label>
                 </div>
-                <input class="uk-input"  type="text" name="userName" placeholder="Name" v-model="form.userName">                
+                <input class="uk-input"  type="text" name="userName" placeholder="Name" v-model="form.userName">
             </div>
 
 
@@ -31,32 +28,34 @@
                     <label class="form__error" for="userName" v-show="selectCheck && !beforeClick">*category must be selected</label>
                 </div>
                 <select class="uk-select" name="category" v-model="form.category">
-                    <option v-for="category in categories" :value="category">{{ category }}</option>         
+                    <option v-for="category in categories" :value="category">{{ category }}</option>
                 </select>
             </div>
 
 
             <div class="uk-margin">
-                <div class="form__row "> 
+                <div class="form__row ">
                     <label for="textarea">Review message</label>
                     <span class="uk-label " :class="{form__error: textareaCheck}">{{ form.textarea.text.length }} / {{ form.textarea.maxlength }}</span>
-                </div> 
+                </div>
                 <textarea class="uk-textarea" name="textarea" rows="5" placeholder="Review" v-model="form.textarea.text"></textarea>
-                
+
             </div>
-           
+
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <div class="form__row "> 
-                    <label><input class="uk-checkbox" type="checkbox" v-model="form.checkAgree"> I agree to the processing of personal data</label> 
+                <div class="form__row ">
+                    <label><input class="uk-checkbox" type="checkbox" v-model="form.checkAgree"> I agree to the processing of personal data</label>
                     <label class="form__error" for="userName" v-show="policyCheck && !beforeClick">*allow processing</label>
-                </div>                               
+                </div>
             </div>
 
 
 
-            <div class="uk-margin">
-                 <button class="uk-button uk-button-primary" type="submit" @click.prevent="Submit"> Send </button>                                              
+            <div class="form__actions">
+                 <button class="uk-button uk-button-primary form__action" type="submit" @click.prevent="Submit">
+                   Send
+                 </button>
             </div>
 
         </fieldset>
@@ -69,12 +68,12 @@
 
 
 
-    <transition name="fade" mode="out-in">            
+    <transition name="fade" mode="out-in">
         <article class="form__status" v-show="showSubmitFeedback && !showSpinner">
                   <div class="form__status-header">
                         <p>Send Status:</p>
-                  </div>    
-            
+                  </div>
+
                   <div class="form__status-logo" v-show="response!=''"><img src="../assets/done.svg" alt="done"></div>
                   <div class="form__status-logo"v-show="responseError!=''"><img src="../assets/failed.svg" alt="done"></div>
 
@@ -93,13 +92,13 @@ var badResponse = "Server connection error";       ///
 
 export default {
   data(){
-    return{   
+    return{
       categories:["protection of the aquatic environment","forest protection","ecological housing","animal care"],
-      errorCounter:[],          
+      errorCounter:[],
       showSpinner:false,
-      beforeClick:true,     
+      beforeClick:true,
 
-      form: {            
+      form: {
           userName: '',
           userEmail: {
             value:'',
@@ -110,19 +109,19 @@ export default {
              text:'',
              maxlength: 500
           },
-          checkAgree: false      
+          checkAgree: false
       },
 
       showSubmitFeedback: false,
       response: '',
-      responseError: ''      
+      responseError: ''
     }
   },
-  computed:{ 
-                //методы проверки полей- выполняют отображение всплывающей подсказки и контроль счетчика ошибок 
+  computed:{
+                //методы проверки полей- выполняют отображение всплывающей подсказки и контроль счетчика ошибок
 
       nameCheck(){
-        return this.form.userName == '' ? ( this.errorCounter[0]=true,  true): (this.errorCounter[0]=false, false); 
+        return this.form.userName == '' ? ( this.errorCounter[0]=true,  true): (this.errorCounter[0]=false, false);
       },
       emailCheck(){
         return !this.emailValidation("email",this.form.userEmail.value) ? ( this.errorCounter[1]=true, true) : (this.errorCounter[1]=false, false)
@@ -133,9 +132,9 @@ export default {
       policyCheck(){
         return !this.form.checkAgree   ? (this.errorCounter[3]=true,   true): (this.errorCounter[3]=false, false);
       },
-      textareaCheck(){       
+      textareaCheck(){
         return this.form.textarea.text.length > this.form.textarea.maxlength ? (this.errorCounter[4]=true,  true) : (this.errorCounter[4]=false,false);
-      },      
+      },
 
   },
   methods: {
@@ -150,15 +149,15 @@ export default {
        (
 
         this.beforeClick = false,
-        this.showSpinner = true,  //показать колесо загрузки 
+        this.showSpinner = true,  //показать колесо загрузки
         this.postRequest(this.form.userName, this.form.userEmail.value, this.form.category, this.form.textarea.text) // функция post - запроса к серверу, в аргументах передаваемые данные
 
-        )      
-        :( 
+        )
+        :(
         this.beforeClick = false,
         alert("Please fill in all fields")); // сообщение если не все поля заполнены
 
-     
+
 
     },
 
@@ -181,7 +180,7 @@ export default {
         this.axios.post('http://localhost:8080/', data)
             .then((response) => {
                 setTimeout(() => {this.showSpinner = false}, 2000);   //убрать колесо загрузки
-                this.showSubmitFeedback = true;     //показать окно ответа          
+                this.showSubmitFeedback = true;     //показать окно ответа
                 this.response = goodResponse;   //полученный ответ присваиваем локальному обЪекту и выводим в блоке feedback (тест)
                 console.log(this.response);     //
                 setTimeout(() => {this.showSubmitFeedback = false}, 6000); //окно ответа пропадет через 6 сек
@@ -189,9 +188,9 @@ export default {
         })
             .catch((error) => {
               setTimeout(() => {this.showSpinner = false}, 2000);
-              this.showSubmitFeedback = true; 
-              this.responseError = badResponse; 
-              console.log(this.responseError);          
+              this.showSubmitFeedback = true;
+              this.responseError = badResponse;
+              console.log(this.responseError);
               setTimeout(() => {this.showSubmitFeedback = false}, 6000);
         });
     },
@@ -199,8 +198,8 @@ export default {
 
 
 
-    errCheck(arr){     
-     return arr.every( (val, i) => val === false) 
+    errCheck(arr){
+     return arr.every( (val, i) => val === false)
     },
 
 
@@ -212,12 +211,15 @@ export default {
     },
 
   }
-     
 
-} 
+
+}
 </script>
 
 <style>
+.form{
+  
+}
 .form__status{
     margin: 1.5rem;
     height: 50vh;
@@ -244,21 +246,14 @@ export default {
     justify-content:center;
     text-align: center;
     padding: 5rem;
-
 }
-
-
-
-
-
-.fade-enter, .fade-leave-active {
-  opacity: 0;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .8s;
-}
-
+  .form__action {
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 3px;
+  }
 </style>
 
 

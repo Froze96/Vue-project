@@ -1,25 +1,37 @@
 <template>
 
- <div class="cardView-wrapper" v-if="cardStats.active">  
-      <div class="cardView">
+ <div class="cardView__wrapper" >  
+  <div class="cardView__main">
+    <div class="cardView__main__header">            
+      <div> {{items[viewId-1].title }}</div>
+      <i class="material-icons cardView__main__header-icon" @click="$emit('closeCardView')" >close</i>
+    </div>
 
-          <div class="cardView__header">            
-                <div> {{items[cardStats.id-1].title }}</div>
-                <i class="material-icons" @click="$emit('closeCardView')" >close</i>
-          </div>
+    <div class="cardView__main__body">
 
+      <div class="cardView__main__body__row">
+        <div class="cardView__main__body__row-text"> {{items[viewId-1].text }}</div>
+        <div class="cardView__main__body__row-img">
+          <img :src="items[viewId-1].cardImg" alt="card-image">
+        </div>
+      </div>
 
+      <div class="cardView__main__body__row">
+        <div class="cardView__main__body__row-text"> {{items[viewId-1].text }}</div>
+        <div class="cardView__main__body__row-img">
+          <img :src="items[viewId-1].cardImg" alt="card-image">
+        </div>
+      </div>
 
+      <div class="cardView__main__body__row">
+        <div class="cardView__main__body__row-text"> {{items[viewId-1].text }}</div>
+        <div class="cardView__main__body__row-img">
+          <img :src="items[viewId-1].cardImg" alt="card-image">
+        </div>
+      </div>
 
-            <div class="cardView__body">
-                <div class="cardView__body-item"> {{items[cardStats.id-1].text }}</div>
-
-                <div class="cardView__body-item">
-                    <img :src="items[cardStats.id-1].cardImg" alt="card-image">
-                </div>
-            </div>
-
-       </div>
+    </div>    
+   </div>
  </div>         
 
 
@@ -65,69 +77,133 @@ export default {
   },
 
 
- props: ['cardStats']
+  props: {      
+    viewId: {
+    type: Number,
+    default: 0
+  }
+},
   
   
 }
 </script>
 
-<style lang="css" >
-  .cardView{
-      position: fixed;
-      width: 70%;
-      height: auto;
-      background: #0E0E20;
-      color: #fff;
-      padding: 2rem;
-      opacity: .95; 
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      overflow-y: auto;      
-  }
-  .cardView__header{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 30px;
-
-  }
-  .cardView__body{
-      display: flex;   
-      align-items: center; 
-      flex-direction: column;
-      justify-content: space-between;      
-      margin-top: 1.5rem;
-      min-height: 70vh;      
-  }
-  .cardView__body-item{
-      display: flex;
-      padding: 1.5rem;       
-  }
-  .cardView__body-item img{
-        width: 100%;
-        height: auto; 
-  }
-  
-  
-
-  .cardView-wrapper{
-    background-color:rgba(0,0,0,.3);
+<style lang="scss" >
+ .cardView__wrapper {
+    background-color:rgba(0,0,0,.5);
     height:100%;
     position:fixed;
     width:100%;
     top:0;
     left:0;
+    z-index: 5;
   }
 
-@media screen and (max-width: 815px){
-  .cardView__body img{
-    height: 30%;            
-  }
-}
+  .cardView__main {
+      position: fixed;
+      width: 70%;
+      height: auto;
+      background: #0E0E20;
+      color: #fff;
+      padding: 2rem;       
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      overflow-y: auto;
 
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 35px;
+
+        &-icon{
+          color: #fff;
+          font-size:55px;          
+          cursor:pointer;
+        }
+      }
+      &__body{
+        display: flex;   
+        align-items: center; 
+        flex-direction: column;        
+        padding: 0 .5rem;
+
+
+        &__row {
+          display: flex;
+          flex-direction: row;
+          margin-top: 1rem; 
+          align-items: center;
+
+
+          &-text {
+            flex: 5;
+            text-align: justify;
+            word-wrap: break-word;
+            margin: .5rem .5rem;
+          } 
+
+          &-img {
+            width: 100%;
+            object-fit: cover;
+            height: auto;
+            flex: 2;
+          }
+
+          &:nth-child(2){
+            flex-direction: row-reverse;
+          }
+
+
+        }       
+      }
+    }
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  @media screen and (max-width: 1200px) {
+    .cardView__main {        
+      width: 80%;        
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .cardView__main {        
+      width: 95%; 
+      margin: 0 1rem; 
+      padding: 0 .5rem;      
+    }
+   }
+
+  @media screen and (max-width: 750px) {
+    .cardView__main { 
+      margin: 0 1rem; 
+      padding: 0;
+ 
+      &__body__row  {
+        flex-direction: column !important;
+        margin-bottom: 1.5rem;
+      }
+     
+    } 
+  }        
+  
+    
     
 
 </style>

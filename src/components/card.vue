@@ -1,116 +1,167 @@
 <template>
+ <div class="card">
 
-   <div class="card-container ">   
+   <div :class="['card__header', imageURL ? 'card__header--background' : 'card__header--primary']">
+     <img
+       :src="imageURL"
+       class="card__header-image"
+       alt="card-image">
 
-          <div class="card uk-animation-toggle" v-for="card in cards">
+     <div
+       v-if="title"
+       class="card__header-title">
+       {{ title }}
+     </div>
+   </div>
 
-                <div class="uk-animation-scale-down">
-                       <div class="card__header" >
-                          <img :src="card.imgSrc" alt="card-image">                  
-                       </div>
-                       <div class="card__body">{{ card.text }} </div>
+   <div class="card__body">
+     <div class="card__body__content">
+       <slot name="content"/>
+     </div>
+   </div>
 
-                       <div class="card__footer">
-                          <button class="card__footer-button" @click="$emit('cardView',card.id)">View</button>
-                      </div>
-                </div>
+   <div class="card__actions">
+     <button class="card__action card__action--open" @click="cardActive = true">
+       View
+     </button>
+   </div>
 
-          </div>
-    </div> 
-     
+   <card-view 
+     v-if="cardActive"
+     :viewId="cardId"
+     @closeCardView="onCloseCardView"> 
+   </card-view>
 
- 
+ </div>
 </template>
 
+
+
 <script>
-export default {
-  data () {
-    return {
+  import cardView from './cardView'
 
-      cards:[
-        {
-          imgSrc:'./src/assets/card1.jpg',
-          text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt voluptates, natus reprehenderit',
-          id:1
-          
-        },
-        {
-          imgSrc:'./src/assets/card2.jpg',
-          text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, est.',
-           id:2
-         
-        },
-        {
-          imgSrc:'./src/assets/card3.jpg',
-          text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam animi harum ad quidem. Commodi!',
-           id:3
-        },
-        {
-          imgSrc:'./src/assets/card4.jpg',
-          text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam animi harum ad quidem. Commodi!',
-           id:4
-        },
-
-      ],
-       
+  export default {
+    name: 'Card',
+    data () {
+      return {
+        cardActive:false
+      }
+    },
+    props: {
+      imageURL: {
+        type: String,
+        default: ''
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      cardId: {
+        type: Number,
+        default: 0
+      }
+    },
+    methods: {
+      onCloseCardView(){
+        this.cardActive = false;
+      }
+    },
+    components: {         
+      cardView
     }
   }
-}
 </script>
 
-<style lang="css" scoped>
-
-  .card-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;  
-    margin-top: .5rem;
-    flex-wrap: wrap; 
-    max-width: 70%; 
-    margin: 0 auto;    
+<style lang="scss">
+  .card {
+    max-width: 325px;    
+    margin: .5rem;
+    &__header {
+      display: flex;
+      align-items: center;
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      &--primary {
+        justify-content: flex-start;
+        padding: 1rem;
+      }
+      &--background {
+        justify-content: center;
+        padding: 4rem 1rem;
+      }
+      &-image {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: brightness(55%);
+      }
+      &-title {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+    }
+    &__body {
+      padding: 1.5rem 1.5rem 0;
+      background: #f8faff;
+      border-left: 2px solid #ad0c13;
+      border-right: 2px solid #ad0c13;
+      &__content {
+        font-size: .9rem;
+        font-weight: 400;
+        line-height: 1rem;
+        color: rgba(35, 46, 58, 0.6);
+        height: 150px;
+      }
+    }
+    &__actions {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: #f8faff;
+      border-bottom: 2px solid #ad0c13;
+      border-left: 2px solid #ad0c13;
+      border-right: 2px solid #ad0c13;
+      border-radius: 0 0 3px 3px;
+    }
+    &__action {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      border: 0;
+      padding: .5rem;
+      height: 2.75rem;
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #bd3137;
+      border-radius: 3px 3px 0 0;
+      cursor: pointer;
+      transition: all 0.1s ease-in;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: #cc343b;
+        left: 0;
+        bottom: -3px;
+      }
+      &:hover {
+        background: #cc343b;
+        color: #fff;
+      }
+    }
   }
-
-
-  .card{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;  
-    background: transparent;
-    color: #fff;
-    margin: 1rem;
-    width: 232px;   
-    box-sizing: border-box;
-    border-bottom: .5px solid #fff;
-  }
-  .card__header img{      
-    width: 100%;
-  }  
-  .card__body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 6rem;
-    padding: .5rem;
-  }
-
-  .card__footer{
-    display: flex;
-    justify-content: flex-end;
-    padding: 1rem;
-  }
-  .card__footer-button{
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    border: 3px solid #963136;
-    padding: .5rem 1.2rem;
-    border-radius: 20px;
-    background: transparent;
-    transition: all 0.5s ease-out;
-  }
-  .card__footer-button:hover{
-    background: #963136;  
-  }
-
- 
 </style>
