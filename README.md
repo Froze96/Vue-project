@@ -1,6 +1,6 @@
-# vue_2
+# 'Welcome to my Vue project'
 
-> Example website with **Vue.js** framework.
+> It is example website with working feedBack form.
 ***
 ### Website screenshot:
 ***
