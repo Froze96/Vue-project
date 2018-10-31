@@ -1,6 +1,12 @@
 # vue_2
 
 > A Vue.js project
+> Example website with Vue.js framework.
+
+#Description:
+
+
+
 
 ## Build Setup
 
