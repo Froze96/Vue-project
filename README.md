@@ -2,7 +2,9 @@
 
 > Example website with **Vue.js** framework.
 ***
-### Description:
+### Website screenshot:
+***
+![Full sized screenshot of project](https://github.com/Froze96/Vue-project/blob/master/src/assets/vue.png)
 ***
 **Технологии:**
 ***
