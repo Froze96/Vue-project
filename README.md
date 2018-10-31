@@ -4,16 +4,26 @@
 ***
 ### Description:
 ***
-Технологии:
+**Технологии:**
+***
 -HTML (templates)
--SCSS 
+***
+-SCSS
+***
 -BEM
+***
 -Vue.js (Vue - cli)
+***
 -Webpack - simple
+***
 -UiKit (Ui framework) 
+***
 -Axios (  form requests)
+***
 -JavaScript  (logic & form validation)
+***
 -Git
+***
 
 
 
