@@ -6,23 +6,15 @@
 ***
 **Технологии:**
 ***
--HTML (templates)
-***
--SCSS
-***
--BEM
-***
--Vue.js (Vue - cli)
-***
--Webpack - simple
-***
--UiKit (Ui framework) 
-***
--Axios (  form requests)
-***
--JavaScript  (logic & form validation)
-***
--Git
+1. -HTML (templates)
+2. -SCSS
+3. -BEM
+4. -Vue.js (Vue - cli) <https://vuejs.org/>
+5. -Webpack - simple
+6. -UiKit (Ui framework) <https://getuikit.com/>
+7. -Axios (  form requests)
+8. -JavaScript  (logic & form validation)
+9. -Git
 ***
 
 
